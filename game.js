@@ -1,26 +1,197 @@
 /* flags list for the game */
 const prideFlags = [
-    "gay",
-    "lesbian",
-    "asexual",
-    "pansexual",
-    "transgender",
-    "bisexual",
-    "genderfluid",
-    "agender",
-    "aroace",
-    "demiboy",
-    "demigirl",
-    "demisexual",
-    "genderqueer",
-    "polyamory",
-    "aromantic",
-    "intersexual",
-    "polysexual",
-    "demiromantic",
-    "gray-asexual",
-    "panromantic",
-    "non-binary",
+    {
+        name: "45XY/46XY",
+        img: "45X-46XY-mosaicism.png"
+    },
+    {
+        name: "Achillean",
+        img: "achillean.jpg"
+    },
+    {
+        name: "Agender",
+        img: "agender.png"
+    },
+    {
+        name: "Ambisexual",
+        img: "ambi.png"
+    },
+    {
+        name: "Androgyne",
+        img: "androgynesexual.png"
+    },
+    {
+        name: "Aromantic",
+        img: "aromantic.jpg"
+    },
+    {
+        name: "Asexual",
+        img: "asexual.jpg"
+    },
+    {
+        name: "Bi Gay",
+        img: "bi-gay.png"
+    },
+    {
+        name: "Bi Lesbian",
+        img: "bi-lesbian.png"
+    },
+    {
+        name: "Bi-pan",
+        img: "bi-pan.png"
+    },
+    {
+        name: "Bisexual",
+        img: "bisexual.jpg"
+    },
+    {
+        name: "Black Bisexual",
+        img: "black-bisexual.png"
+    },
+    {
+        name: "Black Gay",
+        img: "black-gay.png"
+    },
+    {
+        name: "Black Lesbian",
+        img: "black-lesbian.png"
+    },
+    {
+        name: "Black Pansexual",
+        img: "black-pansexual.png"
+    },
+    {
+        name: "Black Polysexual",
+        img: "black-polysexual.png"
+    },
+    {
+        name: "Black Transgender",
+        img: "black-transgender.png"
+    },
+    {
+        name: "Boi",
+        img: "boi.png"
+    },
+    {
+        name: "Demiromantic",
+        img: "demiromantic.jpg"
+    },
+    {
+        name: "Demisexual",
+        img: "demisexual.jpg"
+    },
+    {
+        name: "Fingender",
+        img: "fingender.png"
+    },
+    {
+        name: "Gay",
+        img: "gay.png"
+    },
+    {
+        name: "Gay Man",
+        img: "gay-man.png"
+    },
+    {
+        name: "Genderfae",
+        img: "genderfae.png"
+    },
+    {
+        name: "Genderfaun",
+        img: "genderfaun.png"
+    },
+    {
+        name: "Gender Non-Conforming",
+        img: "gender-nonconforming.png"
+    },
+    {
+        name: "Gender Questioning",
+        img: "gender-questioning.png"
+    },
+    {
+        name: "Gray Asexual",
+        img: "gray-asexual.jpg"
+    },
+    {
+        name: "Klinefelter",
+        img: "klinefelter.png"
+    },
+    {
+        name: "Lesbian",
+        img: "lesbian.png"
+    },
+    {
+        name: "Midgender",
+        img: "midgender.png"
+    },
+    {
+        name: "Mingender",
+        img: "mingender.png"
+    },
+    {
+        name: "Ningender",
+        img: "ningender.png"
+    },
+    {
+        name: "Nonamory",
+        img: "nonamory.png"
+    },
+    {
+        name: "Omnique",
+        img: "omnique.png"
+    },
+    {
+        name: "Panamory",
+        img: "panamory.png"
+    },
+    {
+        name: "Pansexual",
+        img: "pansexual.png"
+    },
+    {
+        name: "Polyamory",
+        img: "polyamory.png"
+    },
+    {
+        name: "Polysexual",
+        img: "polysexual.png"
+    },
+    {
+        name: "Qirl",
+        img: "qirl.png"
+    },
+    {
+        name: "Queer",
+        img: "queer.png"
+    },
+    {
+        name: "Queer POC",
+        img: "queer-poc.png"
+    },
+    {
+        name: "Sapphic",
+        img: "sapphic.png"
+    },
+    {
+        name: "Triple X",
+        img: "triple-x.png"
+    },
+    {
+        name: "Two Spirits",
+        img: "two-spirits.png"
+    },
+    {
+        name: "XXYY",
+        img: "xxyy.png"
+    },
+    {
+        name: "XYY",
+        img: "xyy.png"
+    },
+    {
+        name: "Intersex",
+        img: "intersex.png"
+    }
 ];
 
 /* methods */
@@ -54,20 +225,43 @@ const chooseCards = (flags) => {
 
 const createCard = (card) => {
     const cardsWrapper = document.querySelector(".cards-wrapper");
+    /* card container */
+    const cardContainer = document.createElement("div");
+    cardContainer.classList.add("card__container");
+    cardContainer.setAttribute("name", card.name);
+    /* card */
     const cardDiv = document.createElement("div");
     cardDiv.classList.add("card");
-    cardDiv.setAttribute("name", card);
-    const cardFront = document.createElement("div");
-    const cardContent = document.createTextNode(card);
-    cardDiv.appendChild(cardContent);
-    cardsWrapper.appendChild(cardDiv);
+    /* front */
+    const cardFront = document.createElement("div"); 
+    cardFront.classList.add("card__front");
+    const cardImg = document.createElement("img"); // img
+    cardImg.setAttribute("src", `./assets/flags/${card.img}`);
+    cardImg.classList.add("card__img");
+    const cardName = document.createElement("p"); // name
+    cardName.innerText = card.name;
+    cardName.classList.add("card__name");
+    cardFront.appendChild(cardImg);
+    cardFront.appendChild(cardName)
+    /* back */
+    const cardBack = document.createElement("div");
+    cardBack.classList.add("card__back");
+    const cardBackUnicorn = document.createElement("img");
+    cardBackUnicorn.setAttribute("src", './assets/uniuni.png');
+    cardBackUnicorn.classList.add("card__unicorn");
+    cardBack.appendChild(cardBackUnicorn)
 
-    return cardDiv;
+    cardDiv.appendChild(cardFront);
+    cardDiv.appendChild(cardBack);
+    cardContainer.appendChild(cardDiv);
+    cardsWrapper.appendChild(cardContainer);
+
+    return cardContainer;
 };
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
-    const num = 18; /* number of cards */
+    const num = 14; /* number of cards */
 
     let cardsSelected = 0; /* check how many cards are selected */
     let deselect; /* deselect is the function will run when the two selected cards don't match */
@@ -79,10 +273,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
     cardsArr.forEach((card) => {
         const cardDiv = createCard(card);
         cardDiv.addEventListener("click", () => {
-
             /* if deselectRunning is true, we have already selected two different cards
                We need to wait for 'deselect' function to run before selecting a new card */
-            if (!deselectRunning && !cardDiv.classList.contains("selected")) {
+            if (!deselectRunning) {
                 console.log('yes')
                 clearTimeout(deselect);
                 ++cardsSelected;
@@ -96,16 +289,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     ) {
                         selected[0].classList.add("matched");
                         selected[1].classList.add("matched");
+                    } 
+                    
+                    deselectRunning = true;
+                    deselect = setTimeout(() => {
                         selected[0].classList.remove("selected");
                         selected[1].classList.remove("selected");
-                    } else {
-                        deselectRunning = true;
-                        deselect = setTimeout(() => {
-                            selected[0].classList.remove("selected");
-                            selected[1].classList.remove("selected");
-                            deselectRunning = false;
-                        }, 1000);
-                    }
+                        deselectRunning = false;
+                    }, 1000);
+                    
 
                     cardsSelected = 0;
                 }
