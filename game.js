@@ -1,199 +1,3 @@
-/* flags list for the game */
-const prideFlags = [
-    {
-        name: "45XY/46XY",
-        img: "45X-46XY-mosaicism.png"
-    },
-    {
-        name: "Achillean",
-        img: "achillean.jpg"
-    },
-    {
-        name: "Agender",
-        img: "agender.png"
-    },
-    {
-        name: "Ambisexual",
-        img: "ambi.png"
-    },
-    {
-        name: "Androgyne",
-        img: "androgynesexual.png"
-    },
-    {
-        name: "Aromantic",
-        img: "aromantic.jpg"
-    },
-    {
-        name: "Asexual",
-        img: "asexual.jpg"
-    },
-    {
-        name: "Bi Gay",
-        img: "bi-gay.png"
-    },
-    {
-        name: "Bi Lesbian",
-        img: "bi-lesbian.png"
-    },
-    {
-        name: "Bi-pan",
-        img: "bi-pan.png"
-    },
-    {
-        name: "Bisexual",
-        img: "bisexual.jpg"
-    },
-    {
-        name: "Black Bisexual",
-        img: "black-bisexual.png"
-    },
-    {
-        name: "Black Gay",
-        img: "black-gay.png"
-    },
-    {
-        name: "Black Lesbian",
-        img: "black-lesbian.png"
-    },
-    {
-        name: "Black Pansexual",
-        img: "black-pansexual.png"
-    },
-    {
-        name: "Black Polysexual",
-        img: "black-polysexual.png"
-    },
-    {
-        name: "Black Transgender",
-        img: "black-transgender.png"
-    },
-    {
-        name: "Boi",
-        img: "boi.png"
-    },
-    {
-        name: "Demiromantic",
-        img: "demiromantic.jpg"
-    },
-    {
-        name: "Demisexual",
-        img: "demisexual.jpg"
-    },
-    {
-        name: "Fingender",
-        img: "fingender.png"
-    },
-    {
-        name: "Gay",
-        img: "gay.png"
-    },
-    {
-        name: "Gay Man",
-        img: "gay-man.png"
-    },
-    {
-        name: "Genderfae",
-        img: "genderfae.png"
-    },
-    {
-        name: "Genderfaun",
-        img: "genderfaun.png"
-    },
-    {
-        name: "Gender Non-Conforming",
-        img: "gender-nonconforming.png"
-    },
-    {
-        name: "Gender Questioning",
-        img: "gender-questioning.png"
-    },
-    {
-        name: "Gray Asexual",
-        img: "gray-asexual.jpg"
-    },
-    {
-        name: "Klinefelter",
-        img: "klinefelter.png"
-    },
-    {
-        name: "Lesbian",
-        img: "lesbian.png"
-    },
-    {
-        name: "Midgender",
-        img: "midgender.png"
-    },
-    {
-        name: "Mingender",
-        img: "mingender.png"
-    },
-    {
-        name: "Ningender",
-        img: "ningender.png"
-    },
-    {
-        name: "Nonamory",
-        img: "nonamory.png"
-    },
-    {
-        name: "Omnique",
-        img: "omnique.png"
-    },
-    {
-        name: "Panamory",
-        img: "panamory.png"
-    },
-    {
-        name: "Pansexual",
-        img: "pansexual.png"
-    },
-    {
-        name: "Polyamory",
-        img: "polyamory.png"
-    },
-    {
-        name: "Polysexual",
-        img: "polysexual.png"
-    },
-    {
-        name: "Qirl",
-        img: "qirl.png"
-    },
-    {
-        name: "Queer",
-        img: "queer.png"
-    },
-    {
-        name: "Queer POC",
-        img: "queer-poc.png"
-    },
-    {
-        name: "Sapphic",
-        img: "sapphic.png"
-    },
-    {
-        name: "Triple X",
-        img: "triple-x.png"
-    },
-    {
-        name: "Two Spirits",
-        img: "two-spirits.png"
-    },
-    {
-        name: "XXYY",
-        img: "xxyy.png"
-    },
-    {
-        name: "XYY",
-        img: "xyy.png"
-    },
-    {
-        name: "Intersex",
-        img: "intersex.png"
-    }
-];
-
 /* methods */
 const chooseFlags = (numCards) => {
     const numFlags = numCards / 2;
@@ -259,9 +63,32 @@ const createCard = (card) => {
     return cardContainer;
 };
 
-document.addEventListener("DOMContentLoaded", function (event) {
+const play = (num) => {
 
-    const num = 14; /* number of cards */
+    const startMenu = document.querySelector('.start-menu');
+    const cardsWrapper = document.querySelector('.cards-wrapper');
+    const timer = document.querySelector('.timer');
+    const winnerMenu = document.querySelector('.winner');
+    const winnerTime = document.querySelector('.time');
+    const playAgain = document.querySelector('.play-again');
+    const returnToMenu = document.querySelector('.return-menu');
+
+    cardsWrapper.innerHTML = '';
+    timer.innerText = '0 s';
+
+    startMenu.style.display = "none";
+    winnerMenu.style.display = "none";
+    timer.style.display = "block";
+    cardsWrapper.style.display = "flex";
+    //const num = 14; /* number of cards */
+
+    let seconds = 0;
+    let playing = setInterval(() => {
+        ++seconds;
+        timer.innerText = seconds + " s";
+    }, 1000);
+
+    let matched = 0;
 
     let cardsSelected = 0; /* check how many cards are selected */
     let deselect; /* deselect is the function will run when the two selected cards don't match */
@@ -276,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             /* if deselectRunning is true, we have already selected two different cards
                We need to wait for 'deselect' function to run before selecting a new card */
             if (!deselectRunning) {
-                console.log('yes')
+                
                 clearTimeout(deselect);
                 ++cardsSelected;
                 cardDiv.classList.add("selected");
@@ -287,21 +114,39 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     if (
                         selected[0].getAttribute("name") == selected[1].getAttribute("name")
                     ) {
+                        ++matched;
                         selected[0].classList.add("matched");
                         selected[1].classList.add("matched");
                     } 
                     
+                    /* 'deselect' removes the selected class from the cards */
                     deselectRunning = true;
                     deselect = setTimeout(() => {
                         selected[0].classList.remove("selected");
                         selected[1].classList.remove("selected");
                         deselectRunning = false;
+
+                        /* if the number of cards that matched are the same as the number of cards,
+                           you won the game!! */ 
+                        if (matched == num / 2) {
+                            clearInterval(playing);
+
+                            winnerTime.innerText = seconds + " s";
+                            winnerMenu.style.display = "block";
+
+                            playAgain.addEventListener('click', () => play(num));
+                            returnToMenu.addEventListener('click', () => {
+                                startMenu.style.display = "block";
+                                winnerMenu.style.display = "none";
+                                timer.style.display = "none";
+                                cardsWrapper.style.display = "none";
+                            });
+                        }
                     }, 1000);
-                    
 
                     cardsSelected = 0;
                 }
             }
         });
     });
-});
+}

@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Philosopher&family=Reem+Kufi&display=swap');
+
 * {
-    box-sizing: border-box;    
+    box-sizing: border-box;  
+    margin: 0;
+    padding: 0;  
 }
 
 body {
@@ -8,28 +12,109 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: sans-serif;
+    color: #292929;
 }
 
 #game {
     width: 750px;
     height: 560px;
     background: grey;
-    background: #FEAC5E;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to bottom, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to bottom, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    position: relative;
 }
 
-.menu {
+.start-menu {
     width: 100%;
-    height: 50px;
+    height: 100%;
+    background: #9BD2E3;
+    text-align: center;
+}
+
+.title {
+    font-family: 'Reem Kufi', sans-serif;
+    font-size: 60px;
+    font-weight: lighter;
+    padding-top: 20px;
+}
+
+.subtitle {
+    position: relative;
+    margin-top: -10px;
+}
+
+.subtitle img {
+    position: absolute;
+    left: 40%;
+}
+
+.subtitle p {
+    position: absolute;
+    left: 45%;
+    font-family: 'Philosopher', sans-serif;
+    font-size: 30px;
+    line-height: 40px;
+}
+
+.start-buttons {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.start-buttons button {
+    margin: 13px 0;
+    width: 240px;
+    height: 60px;
+    cursor: pointer;
+    font-size: 30px;
+    line-height: 60px;
+    font-family: 'Reem Kufi', sans-serif;
+}
+
+.start--easy {
+    background-color: #ADFD6E;
+    border: 1px solid #89CB55;
+    box-shadow: 2px 2px 4px #89CB55;
+    color: #588932;
+    outline-color: #588932;
+}
+
+.start--medium {
+    background-color: #FDCC6E;
+    border: 1px solid #B8934D;
+    box-shadow: 2px 2px 4px #B8934D;
+    color: #9A7B3F;
+    outline-color:#9A7B3F;
+}
+
+.start--hard {
+    background-color: #FD6EA1;
+    border: 1px solid #B0476D;
+    box-shadow: 2px 2px 4px #B0476D;
+    color: #A04063;
+    outline-color: #A04063;
+}
+
+.timer {
+    display: none; /* block */
+    background-color: lightgray;
+    max-width: 20%;
+    line-height: 40px;
+    text-align: right;
+    margin: 0 auto;
+    padding: 0 10px;
+    font-size: 1.5em;
 }
 
 .cards-wrapper {
-    display: flex;
+    display: none; /* -> flex */
     flex-wrap: wrap;
     height: 500px;
     width: 90%;
-    margin: 0 auto;
+    margin: 10px auto;
     justify-content: space-around;
     align-items: center;
 }
@@ -84,7 +169,7 @@ body {
 .card__name {
     max-width: 95%;
     position: absolute;
-    bottom: 0;
+    bottom: 10%;
 }
 
 .card__back {
@@ -94,9 +179,9 @@ body {
     backface-visibility: hidden;
     border: 2px solid #fafafa;
     border-radius: 5px;
-    background: #6dd5ed;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to bottom, #6dd5ed, #2193b0);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to bottom, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #fbc7d4;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #fbc7d4, #9796f0);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #fbc7d4, #9796f0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .card__unicorn {
@@ -104,15 +189,31 @@ body {
     transform: translateY(50%)
 }
 
-
-
 .card__container.selected > .card,
 .card__container.matched > .card {
     transform: rotateY(180deg); 
 }
 
 .card__container.matched > .card > .card__front {
-    background: lightgreen;
     opacity: 0;
     transition: opacity 1s ease 1000ms, background-color 1000ms ease;
 }
+
+.winner {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.8);
+}
+
+.winner__menu {
+    background: #fafafa;
+    width: 50%;
+    margin: 25% auto;
+    padding: 5%;
+    border-radius: 5px;
+}
+

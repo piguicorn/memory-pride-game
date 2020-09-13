@@ -3,14 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Queer Memory Game</title>
+    <title>Pride Memory Game</title>
     <link rel="stylesheet" href="style.css">
+    <script src="flags.js"></script>
     <script src="game.js"></script>
 </head>
 <body>
     <div id="game">
-        <div class="menu"></div>
+        <div class="start-menu">
+            <h1 class="title">Memory Game</h1>
+            <div class="subtitle">
+                <img src="assets/ribbon.png"/>
+                <p>pride flags version</p>
+            </div>
+            <div class="start-buttons">
+                <button class="start--easy" onclick="play(10)">Easy</button>
+                <button class="start--medium" onclick="play(14)">Medium</button>
+                <button class="start--hard" onclick="play(18)">Hard</button>
+            </div>
+        </div>
+        <p class="timer">0 s</p>
         <div class="cards-wrapper"></div>
+        <div class="winner">
+            <div class="winner__menu">
+                <p>You won this game in</p>
+                <span class="time"></span>
+                <button class="play-again">Play Again</button>
+                <button class="return-menu">Menu</button>
+            </div>
+        </div>
     </div>
 </body>
 </html>
+
+<!-- <p class="timer">0s</p> -->
