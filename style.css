@@ -12,26 +12,25 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: sans-serif;
-    color: #292929;
 }
+    
 
 #game {
     width: 750px;
     height: 560px;
-    background: grey;
     position: relative;
+    background: #9BD2E3;
+    font-family: 'Reem Kufi', sans-serif;
+    color: #292929;
 }
 
 .start-menu {
     width: 100%;
     height: 100%;
-    background: #9BD2E3;
     text-align: center;
 }
 
 .title {
-    font-family: 'Reem Kufi', sans-serif;
     font-size: 60px;
     font-weight: lighter;
     padding-top: 20px;
@@ -98,15 +97,75 @@ body {
     outline-color: #A04063;
 }
 
+.game-menu {
+    display: none;
+}
+
 .timer {
-    display: none; /* block */
-    background-color: lightgray;
+    background-color:#fafafa;
     max-width: 20%;
-    line-height: 40px;
+    line-height: 60px;
     text-align: right;
     margin: 0 auto;
     padding: 0 10px;
     font-size: 1.5em;
+    box-shadow: 3px 3px 2px rgba(41,41,41,.25);
+}
+
+.exit {
+    position: absolute;
+    right: 5%;
+    top: 10px;
+    display: flex;
+    align-items: center;
+    height: 60px;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.exit__btn {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius:50%;
+    background-color: #FBC7D4;
+    border: 5px solid #CF8899;
+    font-size: 30px;
+    color: #CF8899;
+    cursor: pointer;
+}
+
+.exit__btn::after {
+    position: absolute;
+    content: "";
+    width: 50px;
+    height: 50px;
+    border-radius: 50% 0px 0px 50%;
+    left: -5px;
+    top: -5px;
+    background-color:  #9BD2E3;
+    z-index: -1;
+    
+}
+
+.exit p {
+    height: 50px;
+    background-color: #FBC7D4;
+    border: 5px solid #CF8899;
+    width: 135px;
+    height: 45px;
+    border-radius: 20px 0 0 20px;
+    font-size: 30px;
+    text-align: center;
+    line-height: 40px;
+    color: #995268;
+    transform: translateX(220px); /* 25px */
+    z-index: -1;
+    transition: transform .6s ease;
+}
+
+.exit:hover p {
+    transform: translateX(25px);
 }
 
 .cards-wrapper {
@@ -114,14 +173,14 @@ body {
     flex-wrap: wrap;
     height: 500px;
     width: 90%;
-    margin: 10px auto;
+    margin: 0px auto;
     justify-content: space-around;
     align-items: center;
 }
 
 .card__container {
     width: 100px;
-    height: 160px;
+    height: 120px;
     margin: 2px;
     position: relative;
     cursor: pointer;
@@ -163,13 +222,14 @@ body {
 
 .card__img {
     max-width: 95%;
-    margin-top: 30%;
+    margin-top: 10%;
 }
 
 .card__name {
     max-width: 95%;
     position: absolute;
     bottom: 10%;
+    line-height: 16px;
 }
 
 .card__back {
@@ -186,7 +246,8 @@ body {
 
 .card__unicorn {
     max-width: 100%;
-    transform: translateY(50%)
+    transform: translateY(20%);
+    
 }
 
 .card__container.selected > .card,

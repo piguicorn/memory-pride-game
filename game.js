@@ -37,7 +37,7 @@ const createCard = (card) => {
     const cardDiv = document.createElement("div");
     cardDiv.classList.add("card");
     /* front */
-    const cardFront = document.createElement("div"); 
+    const cardFront = document.createElement("div");
     cardFront.classList.add("card__front");
     const cardImg = document.createElement("img"); // img
     cardImg.setAttribute("src", `./assets/flags/${card.img}`);
@@ -46,14 +46,14 @@ const createCard = (card) => {
     cardName.innerText = card.name;
     cardName.classList.add("card__name");
     cardFront.appendChild(cardImg);
-    cardFront.appendChild(cardName)
+    cardFront.appendChild(cardName);
     /* back */
     const cardBack = document.createElement("div");
     cardBack.classList.add("card__back");
     const cardBackUnicorn = document.createElement("img");
-    cardBackUnicorn.setAttribute("src", './assets/uniuni.png');
+    cardBackUnicorn.setAttribute("src", "./assets/uniuni.png");
     cardBackUnicorn.classList.add("card__unicorn");
-    cardBack.appendChild(cardBackUnicorn)
+    cardBack.appendChild(cardBackUnicorn);
 
     cardDiv.appendChild(cardFront);
     cardDiv.appendChild(cardBack);
@@ -64,21 +64,21 @@ const createCard = (card) => {
 };
 
 const play = (num) => {
+    const startMenu = document.querySelector(".start-menu");
+    const gameMenu = document.querySelector(".game-menu");
+    const cardsWrapper = document.querySelector(".cards-wrapper");
+    const timer = document.querySelector(".timer");
+    const winnerMenu = document.querySelector(".winner");
+    const winnerTime = document.querySelector(".time");
+    const playAgain = document.querySelector(".play-again");
+    const returnToMenu = document.querySelector(".return-menu");
 
-    const startMenu = document.querySelector('.start-menu');
-    const cardsWrapper = document.querySelector('.cards-wrapper');
-    const timer = document.querySelector('.timer');
-    const winnerMenu = document.querySelector('.winner');
-    const winnerTime = document.querySelector('.time');
-    const playAgain = document.querySelector('.play-again');
-    const returnToMenu = document.querySelector('.return-menu');
-
-    cardsWrapper.innerHTML = '';
-    timer.innerText = '0 s';
+    cardsWrapper.innerHTML = "";
+    timer.innerText = "0 s";
 
     startMenu.style.display = "none";
     winnerMenu.style.display = "none";
-    timer.style.display = "block";
+    gameMenu.style.display = "block";
     cardsWrapper.style.display = "flex";
     //const num = 14; /* number of cards */
 
@@ -86,6 +86,14 @@ const play = (num) => {
     let playing = setInterval(() => {
         ++seconds;
         timer.innerText = seconds + " s";
+
+        if (seconds == 240) { /* if the user didn't complete the game in 4 minutes, go back to the menu */
+            clearInterval(playing);
+            startMenu.style.display = "block";
+            winnerMenu.style.display = "none";
+            gameMenu.style.display = "none";
+            cardsWrapper.style.display = "none";
+        }
     }, 1000);
 
     let matched = 0;
@@ -94,16 +102,18 @@ const play = (num) => {
     let deselect; /* deselect is the function will run when the two selected cards don't match */
     let deselectRunning = false;
 
-    const cardsArr = chooseCards(chooseFlags(num)); /* get the array of cards we will be playing this game with */
+    const cardsArr = chooseCards(
+        chooseFlags(num)
+    ); /* get the array of cards we will be playing this game with */
 
+    
     /* now let's create the elements for each card!! */
     cardsArr.forEach((card) => {
         const cardDiv = createCard(card);
         cardDiv.addEventListener("click", () => {
             /* if deselectRunning is true, we have already selected two different cards
-               We need to wait for 'deselect' function to run before selecting a new card */
+                     We need to wait for 'deselect' function to run before selecting a new card */
             if (!deselectRunning) {
-                
                 clearTimeout(deselect);
                 ++cardsSelected;
                 cardDiv.classList.add("selected");
@@ -117,8 +127,8 @@ const play = (num) => {
                         ++matched;
                         selected[0].classList.add("matched");
                         selected[1].classList.add("matched");
-                    } 
-                    
+                    }
+
                     /* 'deselect' removes the selected class from the cards */
                     deselectRunning = true;
                     deselect = setTimeout(() => {
@@ -127,18 +137,18 @@ const play = (num) => {
                         deselectRunning = false;
 
                         /* if the number of cards that matched are the same as the number of cards,
-                           you won the game!! */ 
+                                       you won the game!! */
                         if (matched == num / 2) {
+                            
                             clearInterval(playing);
-
                             winnerTime.innerText = seconds + " s";
                             winnerMenu.style.display = "block";
 
-                            playAgain.addEventListener('click', () => play(num));
-                            returnToMenu.addEventListener('click', () => {
+                            playAgain.addEventListener("click", () => play(num));
+                            returnToMenu.addEventListener("click", () => {
                                 startMenu.style.display = "block";
                                 winnerMenu.style.display = "none";
-                                timer.style.display = "none";
+                                gameMenu.style.display = "none";
                                 cardsWrapper.style.display = "none";
                             });
                         }
@@ -148,5 +158,14 @@ const play = (num) => {
                 }
             }
         });
+    });
+
+    const exitBtn = document.querySelector('.exit__btn');
+    exitBtn.addEventListener("click", () => {
+        clearInterval(playing);
+        startMenu.style.display = "block";
+        winnerMenu.style.display = "none";
+        gameMenu.style.display = "none";
+        cardsWrapper.style.display = "none";
     });
 }
