@@ -80,7 +80,6 @@ const play = (num) => {
     winnerMenu.style.display = "none";
     gameMenu.style.display = "block";
     cardsWrapper.style.display = "flex";
-    //const num = 14; /* number of cards */
 
     let seconds = 0;
     let playing = setInterval(() => {
@@ -142,7 +141,7 @@ const play = (num) => {
                             
                             clearInterval(playing);
                             winnerTime.innerText = seconds + " s";
-                            winnerMenu.style.display = "block";
+                            winnerMenu.style.display = "flex";
 
                             playAgain.addEventListener("click", () => play(num));
                             returnToMenu.addEventListener("click", () => {
@@ -160,6 +159,7 @@ const play = (num) => {
         });
     });
 
+    /* if exit button is clicked, well... just exit! */
     const exitBtn = document.querySelector('.exit__btn');
     exitBtn.addEventListener("click", () => {
         clearInterval(playing);
